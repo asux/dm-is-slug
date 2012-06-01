@@ -168,6 +168,7 @@ module DataMapper
         def generate_slug
           return unless self.class.respond_to?(:slug_options) && self.class.slug_options
           raise InvalidSlugSourceError, 'Invalid slug source.' unless slug_source_property || self.respond_to?(slug_source)
+          return if slug_source_value.nil?
           return unless stale_slug?
           attribute_set :slug, unique_slug
         end
